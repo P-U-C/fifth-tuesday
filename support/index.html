@@ -9,30 +9,26 @@
 <link rel="apple-touch-icon" href="../icons/phase.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v=11">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../style.css?v=12">
 </head>
 <body>
-<main class="doc">
-  <a class="back" href="../"><img src="../icons/phase.png" alt="Home"></a>
+<nav class="top"><a class="home" href="../phase/">Phase</a><a href="../">The Virtuous Human</a></nav>
+<main class="qa">
   <h1>Support</h1>
-  <p>Something broken, confusing or missing? Tell us. It's a beta, so we want to hear it.</p>
+  <p>Something broken or missing? It's a beta, so tell us: <a href="https://github.com/P-U-C/phase-site/issues">open an issue</a>. Describe what happened; don't paste health data.</p>
 
-  <h2>Get in touch</h2>
-  <p>Open an issue at <a href="https://github.com/P-U-C/phase-site/issues">github.com/P-U-C/phase-site/issues</a>. Don't paste your health data in there, just tell us what happened.</p>
-
-  <h2>Logging food with Claude</h2>
-  <p>Phase reads a photo or a few words with Claude, using your own Claude API key. Make one at <a href="https://platform.claude.com/settings/keys">platform.claude.com</a>, then paste it into Phase › Settings › Claude. It stays in your iPhone's Keychain. Anthropic bills your key directly: about a cent a meal. Without a key, enter meals by hand.</p>
-
-  <h2>Apple Health</h2>
-  <p>Phase reads burn, exercise, workouts, weight, body fat, lean mass, sleep and food other apps logged, and writes the meals you log and the strength sessions you finish. To change what it may use: the Health app › your profile › Apps › Phase.</p>
-
-  <h2>DEXA scans</h2>
-  <p>Settings › Import a DEXA report reads the PDF with Claude; you check every number before it's saved. Or add a scan by hand: the date and body fat are enough.</p>
-
-  <h2>Your data</h2>
-  <p>Everything stays on your iPhone. Settings › Export your data gives you a JSON and a CSV of your days to keep or to share. Deleting Phase removes what it stored; what it wrote to Apple Health stays there until you delete it in Health.</p>
-  <footer><a href="../">Home</a><a href="../privacy/">Privacy</a><a href="../support/">Support</a><span>© 2026 P-U-C</span></footer>
+  <details open><summary>How do I log food with a photo?</summary>
+    <p>Phase reads a photo or a few words with Claude, using your own Claude API key. Make one at <a href="https://platform.claude.com/settings/keys">platform.claude.com</a> and paste it into Phase › Settings › Claude. It stays in your iPhone's Keychain, and Anthropic bills it directly: about a cent a meal. Phase asks before the first time anything is sent. Without a key, enter meals by hand.</p></details>
+  <details><summary>What does Phase use from Apple Health?</summary>
+    <p>Burn, exercise, workouts, weight, body fat, lean mass, sleep, and food other apps logged. It writes the meals you log and the strength sessions you finish. Change what it may use in the Health app › your profile › Apps › Phase.</p></details>
+  <details><summary>How do DEXA scans work?</summary>
+    <p>Settings › Import a DEXA report reads the PDF with Claude, and you check every number before it's saved. Or add a scan by hand: the date and body fat are enough. Scans keep the body fat and muscle numbers honest.</p></details>
+  <details><summary>What is Intention?</summary>
+    <p>Settings › Intention: maintain, lose fat, gain muscle, or lose fat and gain muscle together. Phase checks the last seven days against it. When you drift, the screen's edge glows and Today shows where that road leads.</p></details>
+  <details><summary>Where is my data, and can I take it with me?</summary>
+    <p>Everything stays on your iPhone. Settings › Export your data gives you a JSON and a CSV of your days. Deleting Phase removes what it stored; what it wrote to Apple Health stays there until you delete it in Health. More in the <a href="../privacy/">privacy policy</a>.</p></details>
 </main>
+<footer class="foot"><a href="../">Home</a><a href="../phase/">Phase</a><a href="../privacy/">Privacy</a><span>© 2026 P-U-C</span></footer>
 </body>
 </html>
