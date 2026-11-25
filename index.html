@@ -3,56 +3,69 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Phase — your body, by the moon</title>
-<meta name="description" content="Phase is a quiet instrument for your body: food against burn drawn as a moon, body composition anchored to your DEXA scans, and how you train. For iPhone.">
-<meta name="theme-color" content="#FBFAFE" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06050A" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="Phase — your body, by the moon">
-<meta property="og:description" content="Food against burn, drawn as a moon. Body composition anchored to your DEXA scans. For iPhone.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Phase — The Virtuous Human</title>
+<meta name="description" content="The Virtuous Human: a balanced, full life, made easy. Phase looks after your body; Field your mind; Gain your wealth.">
+<meta name="theme-color" content="#FAF9F5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B0A0F" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Phase — The Virtuous Human">
+<meta property="og:description" content="A balanced, full life, made easy. Phase is the body.">
+<meta property="og:image" content="icons/phase.png">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/phase.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <section class="hero">
-    <canvas data-moon data-lit="0.72" data-cells="30" data-wax role="img" aria-label="A moon of lilac dots, waxing"></canvas>
-    <h1>Phase</h1>
-    <p class="line">Your body, by the moon.</p>
-    <span class="soon">Coming to iPhone</span>
-  </section>
-
-  <hr class="rule">
-  <section class="three">
-    <div>
-      <h2>The moon</h2>
-      <p>What you've eaten against what you'll burn today. The dark part is your deficit. Training thickens its grain.</p>
-    </div>
-    <div>
-      <h2>The body</h2>
-      <p>Body fat and lean, every day, anchored to your DEXA scans and corrected for glycogen. A map of where you're changing.</p>
-    </div>
-    <div>
-      <h2>The course</h2>
-      <p>Set what you're after. When the last week drifts, Phase shows where that road leads in a week and a month.</p>
-    </div>
-  </section>
-
-  <hr class="rule">
-  <section class="family">
     <p class="eyebrow">The Virtuous Human</p>
-    <div class="moons">
-      <figure class="lit"><canvas data-moon data-lit="0.72" data-cells="14" aria-hidden="true"></canvas>Body</figure>
-      <figure><canvas data-moon data-lit="0.38" data-cells="14" aria-hidden="true"></canvas>Mind</figure>
-      <figure><canvas data-moon data-lit="0.14" data-cells="14" aria-hidden="true"></canvas>Wealth</figure>
+    <h1>A balanced, full life, made easy.</h1>
+    <p class="line">Body, mind and wealth. Three quiet apps that do the tracking for you, so you can get on with living well.</p>
+  </section>
+
+  <section class="family" aria-label="The apps">
+    <figure class="now">
+      <img class="tile" src="icons/phase.png" alt="Phase app icon">
+      <figcaption><strong>Phase</strong><span>Body</span><em class="tag">In beta</em></figcaption>
+    </figure>
+    <figure>
+      <img class="tile" src="icons/field.png" alt="Field app icon">
+      <figcaption><strong>Field</strong><span>Mind</span><em class="tag later">Next</em></figcaption>
+    </figure>
+    <figure>
+      <img class="tile" src="icons/gain.png" alt="Gain app icon">
+      <figcaption><strong>Gain</strong><span>Wealth</span><em class="tag later">Later</em></figcaption>
+    </figure>
+  </section>
+
+  <hr class="rule">
+  <section class="phase">
+    <img class="tile" src="icons/phase.png" alt="">
+    <div>
+      <h2>Phase</h2>
+      <p>Your body, looked after. For iPhone, with Apple Health.</p>
     </div>
-    <p class="note">Phase is the body. Mind and wealth follow.</p>
+  </section>
+  <section class="points">
+    <div>
+      <h3>Eat well, without the counting</h3>
+      <p>Take a photo or say what you ate. Phase works out the rest and keeps the day in view.</p>
+    </div>
+    <div>
+      <h3>See yourself change</h3>
+      <p>Fat, muscle and strength, day by day, kept honest by your scans and your training.</p>
+    </div>
+    <div>
+      <h3>Stay on course</h3>
+      <p>Say what you're after. When a week slips, Phase tells you early, and where it would lead.</p>
+    </div>
   </section>
 </main>
 <footer>
   <span>© 2026 P-U-C</span>
   <nav><a href="privacy/">Privacy</a><a href="support/">Support</a></nav>
 </footer>
-<script src="moon.js"></script>
 </body>
 </html>
