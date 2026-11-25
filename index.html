@@ -13,19 +13,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <main class="poster">
   <h1>You become<br>what you do<br>every day.</h1>
   <canvas id="days" role="img" aria-label="Days, more of them kept as time goes on"></canvas>
+  <section class="apps" id="apps" aria-label="The apps">
+    <a class="app" href="support/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body · in beta</small></a>
+    <div class="app"><img src="icons/field.png" alt=""><span>Field</span><small>mind · next</small></div>
+    <div class="app"><img src="icons/gain.png" alt=""><span>Gain</span><small>money · later</small></div>
+  </section>
+  <footer class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a><span>© 2026 P-U-C</span></footer>
 </main>
-<section class="apps" id="apps" aria-label="The apps">
-  <a class="app" href="support/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body · in beta</small></a>
-  <div class="app"><img src="icons/field.png" alt=""><span>Field</span><small>mind · next</small></div>
-  <div class="app"><img src="icons/gain.png" alt=""><span>Gain</span><small>money · later</small></div>
-</section>
-<footer class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a><span>© 2026 P-U-C</span></footer>
+
 <script>
 // Days, filling the space. Left to right they light up; further right, more of them are kept.
 (() => {
@@ -64,7 +65,7 @@
   let done = false, seen = false;
   const show = () => { if (done && seen) row.classList.add('in'); };
   addEventListener('days-done', () => { done = true; show(); }, { once: true });
-  new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { seen = true; show(); } }, { threshold: 0.3 }).observe(row);
+  seen = true;   // everything is on the one screen
 })();
 </script>
 </body>
