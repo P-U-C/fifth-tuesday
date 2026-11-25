@@ -13,13 +13,15 @@ a { color: inherit; text-decoration: none; }
 /* The apps: they take over the field once the days have gathered into them. A third each, the icon centred and
    as big as the field allows. */
 .apps { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; }
-.app { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 12%; text-align: center;
+.app { font-size: clamp(14px, min(1.7vw, 2.6svh), 26px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 12%; text-align: center;
        opacity: 0; transform: scale(.92); transition: opacity .9s ease, transform 1.1s cubic-bezier(.2,.7,.2,1); }
-.app img { width: min(100%, 100cqh - 7em); aspect-ratio: 1; border-radius: 22.5%; display: block;
+.app img { width: min(100%, 100cqh - 6.4em); aspect-ratio: 1; border-radius: 22.5%; display: block;
            box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 90px -30px rgba(201,184,255,.4); }
-.app span { display: block; margin-top: clamp(10px, 2svh, 28px); font-weight: 700; font-size: clamp(16px, min(2.4vw, 3.6svh), 40px); letter-spacing: -.03em; }
-.app small { display: block; white-space: nowrap; margin-top: 4px; font-size: clamp(12px, min(1.2vw, 1.9svh), 18px); color: var(--grey); }
+.app span { display: block; margin-top: .7em; font-weight: 700; font-size: 2.1em; line-height: 1.1; letter-spacing: -.03em; }
+.app small { display: block; white-space: nowrap; margin-top: .25em; font-size: 1em; color: var(--grey); }
 .apps.in .app { opacity: 1; transform: none; }
+/* Not out yet: lighter. */
+.apps.in .app.later { opacity: .38; }
 .apps.in .app:nth-child(2) { transition-delay: .25s; }
 .apps.in .app:nth-child(3) { transition-delay: .5s; }
 @media (prefers-reduced-motion: reduce) { .app { transition: none; } }
