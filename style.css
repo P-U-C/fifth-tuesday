@@ -44,10 +44,9 @@ img.tile { display: block; aspect-ratio: 1; border-radius: 22.5%; background: va
 .phase img.tile { width: 96px; }
 .phase h2 { font-size: clamp(28px, 6vw, 36px); letter-spacing: -.03em; line-height: 1.1; }
 .phase p { color: var(--secondary); margin-top: 6px; }
-.points { display: grid; gap: 28px; padding: 32px 0 88px; }
-.points h3 { font-size: 19px; letter-spacing: -.015em; }
-.points p { color: var(--soft); margin-top: 6px; }
-@media (min-width: 720px) { .points { grid-template-columns: repeat(3, 1fr); gap: 32px; } .points p { font-size: 16px; } }
+.plain { list-style: none; padding: 28px 0 88px; max-width: 34em; }
+.plain li { font-size: clamp(18px, 4.4vw, 20px); line-height: 1.5; letter-spacing: -.01em; color: var(--soft); padding: 14px 0; border-top: 1px solid var(--hairline); }
+.plain li:first-child { border-top: 0; }
 
 /* Documents */
 .doc { padding-top: 48px; padding-bottom: 72px; }
