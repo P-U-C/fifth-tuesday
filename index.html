@@ -19,15 +19,13 @@
 <main class="poster">
   <h1>You become<br>what you do<br>every day.</h1>
   <canvas id="days" role="img" aria-label="Days, more of them kept as time goes on"></canvas>
-  <footer>
-    <nav class="apps" aria-label="The apps">
-      <a href="support/" title="Phase · body · in beta"><img src="icons/phase.png" alt="Phase, for your body. In beta."></a>
-      <a title="Field · mind · next"><img src="icons/field.png" alt="Field, for your mind. Next."></a>
-      <a title="Gain · money · later"><img src="icons/gain.png" alt="Gain, for your money. Later."></a>
-    </nav>
-    <nav class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a></nav>
-  </footer>
 </main>
+<section class="apps" id="apps" aria-label="The apps">
+  <a class="app" href="support/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body · in beta</small></a>
+  <div class="app"><img src="icons/field.png" alt=""><span>Field</span><small>mind · next</small></div>
+  <div class="app"><img src="icons/gain.png" alt=""><span>Gain</span><small>money · later</small></div>
+</section>
+<footer class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a><span>© 2026 P-U-C</span></footer>
 <script>
 // Days, filling the space. Left to right they light up; further right, more of them are kept.
 (() => {
@@ -54,11 +52,19 @@
         g.beginPath(); g.arc(ox + (x + .5) * cell, oy + (y + .5) * cell, r, 0, 7); g.fill();
       }
     }
-    if (front <= cols) requestAnimationFrame(draw);
+    if (front <= cols) requestAnimationFrame(draw); else window.dispatchEvent(new Event('days-done'));
   }
   const go = () => { layout(); start = performance.now() + 300; requestAnimationFrame(draw); };
   addEventListener('resize', () => { layout(); draw(Infinity); });
   document.fonts ? document.fonts.ready.then(go) : go();
+})();
+// Then the apps, one after another, starting with Phase, once the days are done and the row is in view.
+(() => {
+  const row = document.getElementById('apps');
+  let done = false, seen = false;
+  const show = () => { if (done && seen) row.classList.add('in'); };
+  addEventListener('days-done', () => { done = true; show(); }, { once: true });
+  new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { seen = true; show(); } }, { threshold: 0.3 }).observe(row);
 })();
 </script>
 </body>
