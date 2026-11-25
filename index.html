@@ -13,59 +13,89 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <main class="poster">
   <h1>You become<br>what you do<br>every day.</h1>
-  <div class="field"><canvas id="days" role="img" aria-label="Days, more of them kept as time goes on"></canvas></div>
+  <div class="field">
+    <canvas id="days" aria-hidden="true"></canvas>
   <section class="apps" id="apps" aria-label="The apps">
-    <a class="app" href="support/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body · in beta</small></a>
-    <div class="app"><img src="icons/field.png" alt=""><span>Field</span><small>mind · next</small></div>
-    <div class="app"><img src="icons/gain.png" alt=""><span>Gain</span><small>money · later</small></div>
-  </section>
+      <a class="app" href="support/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body · in beta</small></a>
+      <div class="app"><img src="icons/field.png" alt=""><span>Field</span><small>mind · next</small></div>
+      <div class="app"><img src="icons/gain.png" alt=""><span>Gain</span><small>money · later</small></div>
+    </section>
+  </div>
   <footer class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a><span>© 2026 P-U-C</span></footer>
 </main>
 
 <script>
-// Days, filling the space. Left to right they light up; further right, more of them are kept.
+// The days fill in, left to right, more of them kept as they go. Then they gather into the three apps:
+// each dot drifts into its third of the field and fades as that app's icon comes up.
 (() => {
-  const c = document.getElementById('days'), g = c.getContext('2d');
+  const c = document.getElementById('days'), g = c.getContext('2d'), apps = document.getElementById('apps');
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let seeds = [], cols = 0, rows = 0, cell = 0, start = 0;
+  let dots = [], cols = 0, rows = 0, cell = 0, dpr = 1, t0 = 0, done = false;
+  const FILL_PER_COL = 22, HOLD = 700, GATHER = 1400;
   function layout() {
-    const dpr = Math.min(devicePixelRatio || 1, 2), w = c.clientWidth, h = c.clientHeight;
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = c.clientWidth, h = c.clientHeight;
     c.width = w * dpr; c.height = h * dpr;
-    cell = Math.max(8, w / 72) * dpr;   // 72 columns at any width
+    cell = Math.max(8, w / 72) * dpr;
     cols = Math.floor(c.width / cell); rows = Math.max(1, Math.floor(c.height / cell));
+    const ox = (c.width - cols * cell) / 2, oy = (c.height - rows * cell) / 2;
+    // Where each third's icon sits, in canvas pixels.
+    const box = c.getBoundingClientRect();
+    const icons = [...apps.querySelectorAll('img')].map(img => {
+      const r = img.getBoundingClientRect();
+      return { x: (r.left - box.left) * dpr, y: (r.top - box.top) * dpr, w: r.width * dpr, h: r.height * dpr };
+    });
     let s = 11; const rand = () => (s = (s * 16807) % 2147483647) / 2147483647;
-    seeds = Array.from({ length: cols * rows }, () => rand());
-  }
-  function draw(t) {
-    const r = cell * 0.26, ox = (c.width - cols * cell) / 2, oy = (c.height - rows * cell) / 2;
-    const front = still ? cols + 1 : Math.min(cols + 1, (t - start) / 22);   // columns lit so far
-    g.clearRect(0, 0, c.width, c.height);
+    dots = [];
     for (let x = 0; x < cols; x++) {
       const keep = 0.18 + 0.72 * (x / Math.max(1, cols - 1));
       for (let y = 0; y < rows; y++) {
-        const kept = seeds[x * rows + y] < keep && x < front;
-        g.fillStyle = kept ? '#C9B8FF' : '#1C1A24';
-        g.beginPath(); g.arc(ox + (x + .5) * cell, oy + (y + .5) * cell, r, 0, 7); g.fill();
+        const k = rand() < keep, ic = icons[Math.min(2, Math.floor(3 * x / cols))];
+        const a = rand() * Math.PI * 2, rr = Math.sqrt(rand()) * ic.w * 0.42;
+        dots.push({ col: x, kept: k, x: ox + (x + .5) * cell, y: oy + (y + .5) * cell,
+                    tx: ic.x + ic.w / 2 + Math.cos(a) * rr, ty: ic.y + ic.h / 2 + Math.sin(a) * rr, lag: rand() * 0.35 });
       }
     }
-    if (front <= cols) requestAnimationFrame(draw); else window.dispatchEvent(new Event('days-done'));
   }
-  const go = () => { layout(); start = performance.now() + 300; requestAnimationFrame(draw); };
-  addEventListener('resize', () => { layout(); draw(Infinity); });
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function frame(now) {
+    const t = now - t0, fillEnd = cols * FILL_PER_COL, gatherStart = fillEnd + HOLD;
+    const front = Math.min(cols + 1, t / FILL_PER_COL);
+    const g01 = Math.max(0, Math.min(1, (t - gatherStart) / GATHER));
+    const r = cell * 0.26;
+    g.clearRect(0, 0, c.width, c.height);
+    // Batched: one path per colour and fade step, so a phone draws thousands of dots a frame easily.
+    const paths = new Map();
+    for (const d of dots) {
+      const p = ease(Math.max(0, Math.min(1, (g01 - d.lag) / (1 - d.lag))));
+      const lit = d.kept && d.col < front;
+      const step = Math.round((1 - p) * 8);
+      if (step <= 0) continue;
+      const key = (lit ? 'L' : 'D') + step;
+      let path = paths.get(key); if (!path) paths.set(key, path = new Path2D());
+      const x = d.x + (d.tx - d.x) * p, y = d.y + (d.ty - d.y) * p, rr = r * (1 - 0.5 * p);
+      path.moveTo(x + rr, y); path.arc(x, y, rr, 0, 7);
+    }
+    for (const [key, path] of paths) {
+      g.globalAlpha = (+key.slice(1)) / 8 * (key[0] === 'L' ? 1 : 0.9);
+      g.fillStyle = key[0] === 'L' ? '#C9B8FF' : '#1C1A24';
+      g.fill(path);
+    }
+    g.globalAlpha = 1;
+    if (g01 > 0.35 && !apps.classList.contains('in')) apps.classList.add('in');
+    if (g01 < 1) requestAnimationFrame(frame); else { done = true; g.clearRect(0, 0, c.width, c.height); }
+  }
+  function go() {
+    if (still) { apps.classList.add('in'); return; }
+    layout(); t0 = performance.now() + 300; requestAnimationFrame(frame);
+  }
+  addEventListener('resize', () => { if (!done && !still) layout(); });
   document.fonts ? document.fonts.ready.then(go) : go();
-})();
-// Then the apps, one after another, starting with Phase, once the days are done and the row is in view.
-(() => {
-  const row = document.getElementById('apps');
-  let done = false, seen = false;
-  const show = () => { if (done && seen) row.classList.add('in'); };
-  addEventListener('days-done', () => { done = true; show(); }, { once: true });
-  seen = true;   // everything is on the one screen
 })();
 </script>
 </body>
