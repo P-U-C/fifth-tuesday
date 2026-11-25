@@ -1,67 +1,30 @@
-/* Set like a page from a book: one centred column, justified and hyphenated, a serif for everything, small capitals
-   for labels, an ornament between sections. After Tschichold and Bringhurst; nothing else on the page. */
-:root {
-  --paper: #FAF8F3; --ink: #1B1A18; --grey: #6F6B64; --faint: #E6E2D8; --accent: #5B43C4; --tile: #06050A;
-  color-scheme: light dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --paper: #0C0B0F; --ink: #EDEBE6; --grey: #8F8B86; --faint: #23212A; --accent: #C9B8FF; }
-}
+/* One screen. The line, the days, the three apps. */
+:root { --ground: #06050A; --ink: #F4F2FA; --grey: #77737F; --off: #1C1A24; --lilac: #C9B8FF; color-scheme: dark; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--paper); color: var(--ink);
-  font: 21px/1.55 "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
-  font-variant-numeric: oldstyle-nums; font-kerning: normal; -webkit-font-smoothing: antialiased;
-}
-a { color: inherit; text-decoration: underline; text-decoration-color: var(--faint); text-underline-offset: 4px; text-decoration-thickness: 1px; }
-a:hover { text-decoration-color: var(--accent); }
+html, body { background: var(--ground); color: var(--ink); }
+body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
 
-.page { max-width: 32em; margin: 0 auto; padding: 0 24px; }
-p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
-p + p { text-indent: 1.4em; }
-.sc { font-variant: all-small-caps; letter-spacing: .08em; }
+.poster { height: 100svh; min-height: 560px; display: grid; grid-template-rows: auto 1fr auto; padding: clamp(24px, 5vw, 56px); gap: clamp(24px, 4vw, 44px); }
+.poster h1 { font-weight: 700; font-size: clamp(52px, min(13.5vw, 15vh), 180px); line-height: .9; letter-spacing: -.055em; }
+.poster canvas { width: 100%; height: 100%; display: block; min-height: 0; }
+.poster footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.apps { display: flex; gap: 14px; }
+.apps img { width: 40px; height: 40px; border-radius: 9px; display: block; box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.apps a:not(:first-child) img { opacity: .55; }
+.links { display: flex; gap: 22px; font-size: 14px; color: var(--grey); }
+.links a:hover { color: var(--ink); }
 
-header.title { text-align: center; padding: 18vh 0 2.4em; }
-header.title .sc { color: var(--grey); font-size: 18px; }
-h1 { font-weight: 400; font-size: clamp(38px, 8.4vw, 58px); line-height: 1.08; letter-spacing: -.01em; margin-top: .55em; }
-h1 em, h2 em { font-style: italic; }
-.under { text-align: center; color: var(--grey); font-style: italic; margin-top: 1em; hyphens: none; }
-
-/* A year of days, across the column. */
-.year { display: grid; grid-template-columns: repeat(52, 1fr); grid-auto-flow: column; grid-template-rows: repeat(7, auto);
-        gap: 3px; margin: 2.6em 0 .9em; }
-.year i { aspect-ratio: 1; border-radius: 50%; background: var(--faint); transform: scale(.72); }
-.year i.on { animation: kept .6s ease-out both; animation-delay: calc(300ms + var(--i) * 9ms); }
-@keyframes kept { to { background: var(--accent); transform: scale(.86); } }
-@media (prefers-reduced-motion: reduce) { .year i.on { animation: none; background: var(--accent); transform: scale(.86); } }
-.caption { text-align: center; font-size: 16px; color: var(--grey); font-style: italic; }
-
-.orn { text-align: center; color: var(--accent); letter-spacing: .5em; text-indent: .5em; margin: 2.2em 0 1.8em; font-size: 30px; line-height: 1; user-select: none; }
-h2 { font-weight: 400; font-style: italic; font-size: 27px; text-align: center; margin-bottom: .8em; }
-
-.three { display: flex; justify-content: center; gap: 44px; margin: 2em 0 .4em; text-align: center; }
-.three img { width: 64px; height: 64px; border-radius: 15px; background: var(--tile); display: block; margin: 0 auto .6em; }
-.three span { display: block; font-size: 17px; }
-.three span.sc { font-size: 15px; color: var(--grey); }
-.three .phase span:first-of-type { color: var(--accent); }
-
-.end { text-align: center; margin: 1em 0 0; }
-.end p { text-align: center; hyphens: none; }
-.end .big { font-size: clamp(26px, 5.6vw, 32px); line-height: 1.25; }
-.end .small { color: var(--grey); font-style: italic; margin-top: .6em; }
-
-footer { text-align: center; padding: 5em 24px 3em; font-size: 15px; color: var(--grey); }
-footer .sc { font-size: 16px; }
-footer a { margin: 0 .6em; }
-
-/* Documents (privacy, support): the same page. */
-.doc header.title { padding: 12vh 0 1.6em; }
-.doc header.title img { width: 44px; height: 44px; border-radius: 10px; background: var(--tile); display: block; margin: 0 auto 1.2em; }
-.doc h1 { font-size: clamp(34px, 7vw, 46px); }
-.doc .date { text-align: center; color: var(--grey); font-style: italic; font-size: 17px; margin-top: .4em; }
-.doc h2 { margin-top: 2em; font-size: 24px; }
-.doc p + p { text-indent: 0; margin-top: .8em; }
-.doc ul { list-style: none; }
-.doc li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; margin-top: .8em; }
-.doc strong { font-weight: 600; }
+/* Privacy and support */
+.doc { max-width: 620px; margin: 0 auto; padding: 56px 24px 80px; line-height: 1.6; font-size: 17px; color: #CFCCD6; }
+.doc .back img { width: 40px; height: 40px; border-radius: 9px; display: block; box-shadow: 0 0 0 1px rgba(255,255,255,.08); }
+.doc h1 { color: var(--ink); font-size: clamp(40px, 9vw, 64px); letter-spacing: -.045em; line-height: 1; margin-top: 48px; }
+.doc .date { color: var(--grey); margin-top: 10px; font-size: 15px; }
+.doc h2 { color: var(--ink); font-size: 19px; letter-spacing: -.01em; margin-top: 40px; }
+.doc p, .doc li { margin-top: 10px; }
+.doc ul { padding-left: 18px; }
+.doc li::marker { color: var(--lilac); }
+.doc strong { color: var(--ink); font-weight: 600; }
+.doc a { color: var(--lilac); }
+.doc footer { margin-top: 64px; display: flex; gap: 22px; font-size: 14px; color: var(--grey); }
+.doc footer a { color: var(--grey); }

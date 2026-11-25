@@ -3,75 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Virtuous Human · Phase</title>
-<meta name="description" content="You become what you do every day. Phase is an iPhone app for your body, the first of three from The Virtuous Human.">
-<meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0C0B0F" media="(prefers-color-scheme: dark)">
+<title>The Virtuous Human</title>
+<meta name="description" content="You become what you do every day. Phase, Field and Gain: body, mind and money.">
+<meta name="theme-color" content="#06050A">
 <meta property="og:title" content="You become what you do every day.">
-<meta property="og:description" content="Phase, for your body. The first of three apps from The Virtuous Human.">
 <meta property="og:image" content="icons/phase.png">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/phase.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="page">
-  <header class="title">
-    <div class="sc">The Virtuous Human</div>
-    <h1>You become what you do <em>every day.</em></h1>
-  </header>
-
-  <p>Not what you believe, or plan, or mean to get round to. What you actually do, on an ordinary Tuesday, when it doesn’t feel like it matters and nobody is watching. Your body keeps that record whether you look at it or not.</p>
-  <p>Each day is a small vote for the person you’re turning into. One vote changes nothing. A year of them changes everything, and most of us only find out how we voted when it’s too late to change it.</p>
-
-  <div class="year" id="year" role="img" aria-label="A year of days, more of them kept as the year goes on"></div>
-  <p class="caption">A year of days. The ones you kept, kept adding up.</p>
-
-  <div class="orn" aria-hidden="true">·&#8202;·&#8202;·</div>
-
-  <h2>On purpose, or by default</h2>
-  <p>You’re becoming someone either way. The only question is whether you choose it, or drift into whatever was easiest. We’re making three small apps to help you choose: one for your body, one for your head, one for your money. They don’t lecture. They show you what you really did, so the gap between who you think you are and who you’re becoming has nowhere to hide.</p>
-
-  <div class="three">
-    <div class="phase"><img src="icons/phase.png" alt="Phase"><span>Phase</span><span class="sc">body · in beta</span></div>
-    <div><img src="icons/field.png" alt="Field"><span>Field</span><span class="sc">mind · next</span></div>
-    <div><img src="icons/gain.png" alt="Gain"><span>Gain</span><span class="sc">money · later</span></div>
-  </div>
-
-  <div class="orn" aria-hidden="true">·&#8202;·&#8202;·</div>
-
-  <h2>Phase</h2>
-  <p>Phase is for your body, on iPhone, with Apple Health. Take a photo of what you eat and that’s the logging done. It knows what you burned, so you can see how the day really went. If you have DEXA scans, it uses them to show what’s actually changing, fat and muscle, rather than the number on the scale. Tell it who you’re trying to become, and when a week slides it will say so, and show you where that road leads.</p>
-
-  <div class="orn" aria-hidden="true">·&#8202;·&#8202;·</div>
-
-  <div class="end">
-    <p class="big">The person you’ll be at seventy is being made this week.</p>
-    <p class="small">It starts tomorrow morning, and the morning after that.</p>
-  </div>
+<main class="poster">
+  <h1>You become<br>what you do<br>every day.</h1>
+  <canvas id="days" role="img" aria-label="Days, more of them kept as time goes on"></canvas>
+  <footer>
+    <nav class="apps" aria-label="The apps">
+      <a href="support/" title="Phase · body · in beta"><img src="icons/phase.png" alt="Phase, for your body. In beta."></a>
+      <a title="Field · mind · next"><img src="icons/field.png" alt="Field, for your mind. Next."></a>
+      <a title="Gain · money · later"><img src="icons/gain.png" alt="Gain, for your money. Later."></a>
+    </nav>
+    <nav class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a></nav>
+  </footer>
 </main>
-<footer>
-  <span class="sc">© 2026 P-U-C</span><br>
-  <a href="privacy/">Privacy</a><a href="support/">Support</a>
-</footer>
 <script>
-// A year of days, week by week across the column. Kept days light up in order; there are more of them as the year
-// goes on (a fixed pattern, so the page reads the same every time).
+// Days, filling the space. Left to right they light up; further right, more of them are kept.
 (() => {
-  const year = document.getElementById('year');
-  let seed = 7, n = 0;
-  const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  for (let w = 0; w < 52; w++) {
-    const p = 0.28 + 0.6 * (w / 51);
-    for (let d = 0; d < 7; d++) {
-      const el = document.createElement('i');
-      if (rand() < p) { el.className = 'on'; el.style.setProperty('--i', n++); }
-      year.appendChild(el);
-    }
+  const c = document.getElementById('days'), g = c.getContext('2d');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let seeds = [], cols = 0, rows = 0, cell = 0, start = 0;
+  function layout() {
+    const dpr = Math.min(devicePixelRatio || 1, 2), w = c.clientWidth, h = c.clientHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    cell = Math.max(10, Math.min(18, w / 64)) * dpr;
+    cols = Math.floor(c.width / cell); rows = Math.max(1, Math.floor(c.height / cell));
+    let s = 11; const rand = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    seeds = Array.from({ length: cols * rows }, () => rand());
   }
+  function draw(t) {
+    const r = cell * 0.26, ox = (c.width - cols * cell) / 2, oy = (c.height - rows * cell) / 2;
+    const front = still ? cols + 1 : Math.min(cols + 1, (t - start) / 22);   // columns lit so far
+    g.clearRect(0, 0, c.width, c.height);
+    for (let x = 0; x < cols; x++) {
+      const keep = 0.18 + 0.72 * (x / Math.max(1, cols - 1));
+      for (let y = 0; y < rows; y++) {
+        const kept = seeds[x * rows + y] < keep && x < front;
+        g.fillStyle = kept ? '#C9B8FF' : '#1C1A24';
+        g.beginPath(); g.arc(ox + (x + .5) * cell, oy + (y + .5) * cell, r, 0, 7); g.fill();
+      }
+    }
+    if (front <= cols) requestAnimationFrame(draw);
+  }
+  const go = () => { layout(); start = performance.now() + 300; requestAnimationFrame(draw); };
+  addEventListener('resize', () => { layout(); draw(Infinity); });
+  document.fonts ? document.fonts.ready.then(go) : go();
 })();
 </script>
 </body>
