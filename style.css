@@ -45,10 +45,10 @@ a { color: inherit; text-decoration: none; }
 .doc footer a { color: var(--grey); }
 
 /* ———— Inner pages: Phase, support, privacy ———— */
-.top { display: flex; align-items: center; justify-content: space-between; max-width: 1680px; margin: 0 auto; padding: clamp(20px, 3vw, 36px) clamp(20px, 3vw, 44px); font-size: 14px; color: var(--grey); }
+.top { display: flex; align-items: center; justify-content: space-between; margin: 0 auto; padding: clamp(20px, 2.2vw, 80px) clamp(20px, 3vw, 120px); font-size: clamp(14px, 1vw, 36px); color: var(--grey); }
 .top a:hover { color: var(--ink); }
 .top .home { display: inline-flex; align-items: center; gap: 10px; }
-.wrap { max-width: 1680px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 44px); }
+.wrap { margin: 0 auto; padding: 0 clamp(20px, 3vw, 120px); }
 
 .lead { display: grid; justify-items: center; text-align: center; padding-block: clamp(24px, 6vh, 72px) clamp(40px, 8vh, 88px); }
 .lead .lead-icon { width: clamp(96px, 12vw, 148px); aspect-ratio: 1; border-radius: 22.5%; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 90px -30px rgba(201,184,255,.45); }
@@ -84,7 +84,7 @@ a { color: inherit; text-decoration: none; }
 .foot a:hover { color: var(--ink); }
 
 /* Support: questions that open. */
-.qa { max-width: 1680px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 44px) clamp(48px, 8vh, 96px); }
+.qa { margin: 0 auto; padding: 0 clamp(20px, 3vw, 120px) clamp(48px, 8vh, 96px); }
 .qa h1 { font-size: clamp(48px, 8vw, 96px); font-weight: 700; letter-spacing: -.05em; line-height: .95; padding: clamp(24px, 6vh, 64px) 0 .3em; }
 .qa header p { color: var(--grey); font-size: clamp(17px, 1.6vw, 20px); margin-bottom: 40px; }
 .qa details { border-top: 1px solid #1C1A24; }
@@ -101,7 +101,7 @@ a { color: inherit; text-decoration: none; }
 .fan { display: none; }
 @media (min-width: 760px) {
   .lead { grid-template-columns: 1fr 1.1fr; align-items: center; justify-items: stretch; text-align: left; min-height: calc(100svh - 120px);
-          max-width: 1680px; gap: clamp(32px, 4vw, 72px); }
+          gap: 4vw; }
   .lead-text { justify-items: start; }
   .fan { display: block; position: relative; height: min(76svh, 760px); }
   .fan img { position: absolute; top: 50%; left: 50%; height: 88%; border-radius: 28px; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 120px -40px rgba(0,0,0,.9); }
@@ -109,8 +109,27 @@ a { color: inherit; text-decoration: none; }
   .fan img:nth-child(3) { transform: translate(8%, -50%) rotate(6deg) scale(.9); opacity: .75; }
   .fan img:nth-child(2) { transform: translate(-50%, -52%); z-index: 1; }
   .only-small { display: none; }
-  .points { max-width: 1680px; }
-  .intent { max-width: 1680px; }
+  /* Everything scales with the window, so a big or zoomed-out screen is filled, not a small island in the middle. */
+  .lead .lead-icon { width: 8.5vw; }
+  .lead h1 { font-size: 9vw; }
+  .lead p { font-size: 1.7vw; }
+  .store { font-size: 1.15vw; padding: .8em 1.4em .8em 1.1em; border-radius: .9em; margin-top: 2vw; }
+  .store small { font-size: .7em; }
+  .soon { font-size: .9vw; }
+  .fan { height: 74svh; }
+  .points h2 { font-size: 1.7vw; }
+  .points p { font-size: 1.15vw; }
+  .intent { grid-template-columns: 1fr 22vw; }
+  .intent h2 { font-size: 5.5vw; }
+  .intent .goals span { font-size: 1.05vw; }
+  .intent p { font-size: 1.4vw; }
+  .help { font-size: 1.2vw; }
+  .foot { font-size: max(13px, .9vw); }
+  .qa h1 { font-size: 6.5vw; }
+  .qa header p { font-size: 1.4vw; }
+  .qa summary { font-size: 1.4vw; }
+  .qa details p { font-size: 1.1vw; }
+  .qa summary { padding: 1.2vw 0; }
 
   /* Support: heading left, questions right. */
   .qa { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
