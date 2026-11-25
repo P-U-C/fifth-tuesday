@@ -25,7 +25,7 @@ img.tile { display: block; aspect-ratio: 1; border-radius: 22.5%; background: va
 .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--secondary); font-weight: 600; }
 
 /* Home */
-.hero { padding: clamp(72px, 14vh, 140px) 0 72px; }
+.hero { padding: clamp(72px, 14vh, 140px) 0 48px; }
 .hero h1 { font-size: clamp(40px, 9vw, 68px); font-weight: 700; letter-spacing: -.035em; line-height: 1.04; margin-top: 18px; max-width: 12em; }
 .hero .line { font-size: clamp(18px, 4.4vw, 21px); color: var(--secondary); margin-top: 20px; max-width: 30em; letter-spacing: -.01em; }
 
@@ -44,9 +44,26 @@ img.tile { display: block; aspect-ratio: 1; border-radius: 22.5%; background: va
 .phase img.tile { width: 96px; }
 .phase h2 { font-size: clamp(28px, 6vw, 36px); letter-spacing: -.03em; line-height: 1.1; }
 .phase p { color: var(--secondary); margin-top: 6px; }
-.plain { list-style: none; padding: 28px 0 88px; max-width: 34em; }
+.plain { list-style: none; padding: 28px 0 64px; max-width: 34em; }
 .plain li { font-size: clamp(18px, 4.4vw, 20px); line-height: 1.5; letter-spacing: -.01em; color: var(--soft); padding: 14px 0; border-top: 1px solid var(--hairline); }
 .plain li:first-child { border-top: 0; }
+
+/* The votes */
+.votes { padding: 8px 0 80px; }
+.days { display: grid; grid-template-columns: repeat(7, 14px); gap: 14px; }
+.days span { aspect-ratio: 1; border-radius: 50%; background: var(--hairline); }
+.days span.on { background: var(--accent); animation: vote .5s ease-out both; animation-delay: calc(400ms + var(--i) * 70ms); }
+@keyframes vote { from { background: var(--hairline); transform: scale(.6); } to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .days span.on { animation: none; } }
+.votes p { margin-top: 24px; font-size: clamp(18px, 4.4vw, 20px); color: var(--soft); letter-spacing: -.01em; }
+
+.said { padding: 72px 0 40px; max-width: 34em; }
+.said h2 { font-size: clamp(28px, 6vw, 36px); letter-spacing: -.03em; line-height: 1.1; }
+.said p { margin-top: 16px; font-size: clamp(18px, 4.4vw, 20px); color: var(--soft); letter-spacing: -.01em; }
+
+.close { padding: 72px 0 96px; }
+.close p { font-size: clamp(26px, 6vw, 36px); font-weight: 700; letter-spacing: -.03em; line-height: 1.15; max-width: 16em; }
+.close p.soft { max-width: none; font-weight: 400; color: var(--secondary); font-size: clamp(18px, 4.4vw, 21px); letter-spacing: -.01em; margin-top: 14px; }
 
 /* Documents */
 .doc { padding-top: 48px; padding-bottom: 72px; }

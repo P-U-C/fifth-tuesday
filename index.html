@@ -21,8 +21,19 @@
 <main>
   <section class="hero">
     <p class="eyebrow">The Virtuous Human</p>
-    <h1>Most of a good life is small stuff, done often.</h1>
-    <p class="line">We're making three apps to help with it: one for your body, one for your head, one for your money. Phase is the first.</p>
+    <h1>You become what you do every day.</h1>
+    <p class="line">Not what you believe, or plan, or mean to get round to. What you actually do, on an ordinary Tuesday, when nobody's watching.</p>
+  </section>
+
+  <section class="votes" aria-label="Five weeks of days, more of them kept as the weeks go on">
+    <div class="days" id="days"></div>
+    <p>Every day is a vote for who you're turning into.<br>Skip enough of them and you lose the vote.</p>
+  </section>
+
+  <hr class="rule">
+  <section class="said">
+    <h2>On purpose, or by default.</h2>
+    <p>You're becoming someone either way. Most of us drift into it, doing whatever's easiest. We're building three small apps that help you do it on purpose: they show you what you really did, so the gap between who you think you are and who you're becoming can't hide.</p>
   </section>
 
   <section class="family" aria-label="The apps">
@@ -45,19 +56,41 @@
     <img class="tile" src="icons/phase.png" alt="">
     <div>
       <h2>Phase</h2>
-      <p>For iPhone. Works with Apple Health.</p>
+      <p>For your body. iPhone, with Apple Health.</p>
     </div>
   </section>
   <ul class="plain">
-    <li>Take a photo of your lunch. Phase works out what's in it.</li>
-    <li>It knows what you've burned, so you can see where the day stands.</li>
-    <li>Got DEXA scans? It uses them to show what's actually changing, fat and muscle, not just weight.</li>
-    <li>Tell it what you're going for. If a week goes sideways, it'll let you know.</li>
+    <li>Take a photo of what you eat. That's the logging done.</li>
+    <li>See how the day really went: what you ate, what you burned, whether you moved.</li>
+    <li>Got DEXA scans? See what's actually changing, fat and muscle, not just the number on the scale.</li>
+    <li>Tell it who you're trying to become. If a week slides, it says so, and shows you where that road goes.</li>
   </ul>
+
+  <hr class="rule">
+  <section class="close">
+    <p>The person you'll be at seventy is being made this week.</p>
+    <p class="soft">It starts tomorrow morning. And the morning after that.</p>
+  </section>
 </main>
 <footer>
   <span>© 2026 P-U-C</span>
   <nav><a href="privacy/">Privacy</a><a href="support/">Support</a></nav>
 </footer>
+<script>
+// Five weeks of days. Kept days light up, a few more each week: the votes add up.
+(() => {
+  const grid = document.getElementById('days');
+  const kept = [3, 4, 4, 5, 6];        // days kept per week
+  let n = 0;
+  kept.forEach((k, w) => {
+    const order = [1, 3, 5, 0, 2, 4, 6].map(d => (d + w * 2) % 7).slice(0, k);
+    for (let d = 0; d < 7; d++) {
+      const el = document.createElement('span');
+      if (order.includes(d)) { el.className = 'on'; el.style.setProperty('--i', n++); }
+      grid.appendChild(el);
+    }
+  });
+})();
+</script>
 </body>
 </html>
