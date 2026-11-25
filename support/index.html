@@ -10,13 +10,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v=12">
+<link rel="stylesheet" href="../style.css?v=13">
 </head>
 <body>
 <nav class="top"><a class="home" href="../phase/">Phase</a><a href="../">The Virtuous Human</a></nav>
 <main class="qa">
+  <header>
   <h1>Support</h1>
   <p>Something broken or missing? It's a beta, so tell us: <a href="https://github.com/P-U-C/phase-site/issues">open an issue</a>. Describe what happened; don't paste health data.</p>
+  </header>
+  <div class="list">
 
   <details open><summary>How do I log food with a photo?</summary>
     <p>Phase reads a photo or a few words with Claude, using your own Claude API key. Make one at <a href="https://platform.claude.com/settings/keys">platform.claude.com</a> and paste it into Phase › Settings › Claude. It stays in your iPhone's Keychain, and Anthropic bills it directly: about a cent a meal. Phase asks before the first time anything is sent. Without a key, enter meals by hand.</p></details>
@@ -28,6 +31,7 @@
     <p>Settings › Intention: maintain, lose fat, gain muscle, or lose fat and gain muscle together. Phase checks the last seven days against it. When you drift, the screen's edge glows and Today shows where that road leads.</p></details>
   <details><summary>Where is my data, and can I take it with me?</summary>
     <p>Everything stays on your iPhone. Settings › Export your data gives you a JSON and a CSV of your days. Deleting Phase removes what it stored; what it wrote to Apple Health stays there until you delete it in Health. More in the <a href="../privacy/">privacy policy</a>.</p></details>
+  </div>
 </main>
 <footer class="foot"><a href="../">Home</a><a href="../phase/">Phase</a><a href="../privacy/">Privacy</a><span>© 2026 P-U-C</span></footer>
 </body>
