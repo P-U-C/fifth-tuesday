@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v=18">
+<link rel="stylesheet" href="../style.css?v=19">
 </head>
 <body>
 <nav class="top"><a class="home" href="../">The Virtuous Human</a><a href="../support/">Support</a></nav>
@@ -82,8 +82,9 @@
   const N = 36, dots = [];
   let picked = false, timer;
   const set = (h, user) => {
-    root.style.setProperty('--pick', `hsl(${h} 100% 86%)`);
-    root.style.setProperty('--tint', `hsl(${h} 85% 62%)`); root.style.setProperty('--on', h === LILAC ? 0 : 1);
+    const c = `hsl(${h} 100% 84%)`;   // one colour: the dot, the page accent and the app's tint
+    root.style.setProperty('--pick', c);
+    root.style.setProperty('--tint', c); root.style.setProperty('--on', h === LILAC ? 0 : 1);
     dots.forEach(d => d.setAttribute('aria-checked', String(+d.dataset.h === h)));
     if (user) { picked = true; clearInterval(timer); try { localStorage.setItem('phase-hue', h); } catch {} }
   };

@@ -141,7 +141,7 @@ a { color: inherit; text-decoration: none; }
 .tint { position: relative; display: block; }
 .tint img { display: block; width: 100%; height: 100%; border-radius: inherit; box-shadow: none !important; }
 /* The picked colour, laid only over the app's lilac (each image's mask) with the colour blend: same brightness, new hue. */
-.tint i { position: absolute; inset: 0; border-radius: inherit; background: var(--tint, #C9B8FF); mix-blend-mode: color;
+.tint i { position: absolute; inset: 0; border-radius: inherit; background: var(--tint, #C9B8FF);
                -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
                opacity: var(--on, 0); transition: opacity .4s ease, background .4s ease; pointer-events: none; }
 .colour { display: grid; grid-template-columns: minmax(220px, 30vw) 1fr; gap: 6vw; align-items: center; border-top: 1px solid #1C1A24;
@@ -156,7 +156,7 @@ a { color: inherit; text-decoration: none; }
 .wheel::after { content: ""; position: absolute; inset: 30%; border-radius: 50%; background: var(--pick); opacity: .9; transition: background .5s ease;
                 box-shadow: 0 0 120px 10px color-mix(in srgb, var(--pick) 35%, transparent); }
 .wheel button { position: absolute; width: 6.5%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 0; padding: 0; cursor: pointer;
-                background: hsl(var(--h) 100% 82%); transition: transform .2s ease; }
+                background: hsl(var(--h) 100% 84%); transition: transform .2s ease; }
 .wheel button:hover { transform: translate(-50%, -50%) scale(1.35); }
 .wheel button[aria-checked="true"] { transform: translate(-50%, -50%) scale(1.6); box-shadow: 0 0 0 2px var(--ground), 0 0 0 3.5px var(--ink); }
 .intent .goals span { border-color: color-mix(in srgb, var(--pick) 40%, #2A2733); }
