@@ -1,5 +1,5 @@
 /* One screen. The line, the days, the three apps. */
-:root { --ground: #06050A; --ink: #F4F2FA; --grey: #77737F; --off: #1C1A24; --lilac: #C9B8FF; color-scheme: dark; }
+:root { --pick: #C9B8FF; --shift: 0deg; --ground: #06050A; --ink: #F4F2FA; --grey: #77737F; --off: #1C1A24; --lilac: #C9B8FF; color-scheme: dark; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--ground); color: var(--ink); }
 body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -136,3 +136,24 @@ a { color: inherit; text-decoration: none; }
   .qa header { position: sticky; top: 40px; }
   .qa .list { padding-top: clamp(24px, 6vh, 64px); }
 }
+
+/* Your colour: the app's screens and icon turn to the picked shade; the page's accent follows. */
+.lead .lead-icon, .fan img, .shots img, .intent img { filter: hue-rotate(var(--shift)); transition: filter .5s ease; }
+.colour { display: grid; grid-template-columns: minmax(220px, 30vw) 1fr; gap: 6vw; align-items: center; border-top: 1px solid #1C1A24;
+          padding-block: clamp(64px, 10vh, 120px); }
+.colour h2 { font-size: clamp(40px, 5.5vw, 200px); letter-spacing: -.05em; line-height: .95; }
+.colour h2 em { font-style: normal; color: var(--pick); transition: color .5s ease; }
+.colour p { color: var(--grey); margin-top: 1.2em; font-size: clamp(17px, 1.4vw, 48px); line-height: 1.5; max-width: 30em; }
+.reset { margin-top: 1.6em; background: none; border: 1px solid #2A2733; color: var(--ink); font: inherit; font-size: clamp(14px, 1vw, 32px);
+         padding: .6em 1.1em; border-radius: 999px; cursor: pointer; }
+.reset:hover { border-color: var(--pick); }
+.wheel { position: relative; aspect-ratio: 1; width: 100%; }
+.wheel::after { content: ""; position: absolute; inset: 30%; border-radius: 50%; background: var(--pick); opacity: .9; transition: background .5s ease;
+                box-shadow: 0 0 120px 10px color-mix(in srgb, var(--pick) 35%, transparent); }
+.wheel button { position: absolute; width: 6.5%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+                background: hsl(var(--h) 100% 82%); transition: transform .2s ease; }
+.wheel button:hover { transform: translate(-50%, -50%) scale(1.35); }
+.wheel button[aria-checked="true"] { transform: translate(-50%, -50%) scale(1.6); box-shadow: 0 0 0 2px var(--ground), 0 0 0 3.5px var(--ink); }
+.intent .goals span { border-color: color-mix(in srgb, var(--pick) 40%, #2A2733); }
+.help a { border-bottom-color: var(--pick); }
+@media (max-width: 759px) { .colour { grid-template-columns: 1fr; } .wheel { max-width: 300px; justify-self: center; } }

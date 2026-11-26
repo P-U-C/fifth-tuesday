@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v=16">
+<link rel="stylesheet" href="../style.css?v=17">
 </head>
 <body>
 <nav class="top"><a class="home" href="../">The Virtuous Human</a><a href="../support/">Support</a></nav>
@@ -51,6 +51,15 @@
     <div><h2>Train</h2><p>Log a session in a few taps and see how you've trained beside what changed.</p></div>
   </section>
 
+  <section class="colour wrap">
+    <div class="wheel" id="wheel" role="radiogroup" aria-label="Pick a colour"></div>
+    <div>
+      <h2>Your <em>colour.</em></h2>
+      <p>Phase is lilac until you make it yours. Pick any colour and the whole app follows: the moon, the charts, the widgets on your Lock Screen. Try it here.</p>
+      <button class="reset" id="reset" type="button">Back to lilac</button>
+    </div>
+  </section>
+
   <section class="intent wrap">
     <div>
       <h2>Intention.</h2>
@@ -65,5 +74,38 @@
   </section>
 </main>
 <footer class="foot"><a href="../">Home</a><a href="../privacy/">Privacy</a><span>© 2026 P-U-C</span></footer>
+<script>
+// Your colour: a ring of dots, one per hue. Picking one tints the page's accent and turns the app's screens to that
+// shade (they're lilac, so it's a hue turn from lilac). Until someone picks, it drifts slowly round the ring.
+(() => {
+  const wheel = document.getElementById('wheel'), root = document.documentElement, LILAC = 254;
+  const N = 36, dots = [];
+  let picked = false, timer;
+  const set = (h, user) => {
+    root.style.setProperty('--pick', `hsl(${h} 100% 86%)`);
+    root.style.setProperty('--shift', `${h - LILAC}deg`);
+    dots.forEach(d => d.setAttribute('aria-checked', String(+d.dataset.h === h)));
+    if (user) { picked = true; clearInterval(timer); try { localStorage.setItem('phase-hue', h); } catch {} }
+  };
+  for (let i = 0; i < N; i++) {
+    const h = (LILAC + i * 360 / N) % 360, a = i / N * Math.PI * 2 - Math.PI / 2;
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.h = h; b.setAttribute('role', 'radio'); b.setAttribute('aria-label', `Hue ${Math.round(h)}`);
+    b.style.cssText = `--h:${h};left:${50 + 44 * Math.cos(a)}%;top:${50 + 44 * Math.sin(a)}%`;
+    b.addEventListener('click', () => set(h, true));
+    wheel.appendChild(b); dots.push(b);
+  }
+  document.getElementById('reset').addEventListener('click', () => { set(LILAC, true); try { localStorage.removeItem('phase-hue'); } catch {} });
+  let saved = null; try { saved = localStorage.getItem('phase-hue'); } catch {}
+  if (saved !== null) { set(+saved, false); picked = true; } else set(LILAC, false);
+  if (!picked && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    new IntersectionObserver((es, ob) => {
+      if (!es.some(e => e.isIntersecting)) return; ob.disconnect();
+      timer = setInterval(() => { if (picked) return; i = (i + 1) % N; set(+dots[i].dataset.h, false); if (i === 0) clearInterval(timer); }, 160);
+    }, { threshold: 0.5 }).observe(wheel);
+  }
+})();
+</script>
 </body>
 </html>
