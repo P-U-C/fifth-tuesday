@@ -13,14 +13,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../style.css?v=17">
+<link rel="stylesheet" href="../style.css?v=18">
 </head>
 <body>
 <nav class="top"><a class="home" href="../">The Virtuous Human</a><a href="../support/">Support</a></nav>
 <main>
   <section class="lead wrap">
     <div class="lead-text">
-      <img class="lead-icon" src="../icons/phase.png" alt="">
+      <span class="tint lead-icon"><img src="../icons/phase.png" alt=""><i style="-webkit-mask-image:url(masks/icon.png);mask-image:url(masks/icon.png)"></i></span>
       <h1>Phase</h1>
       <p>Your body, day by day.</p>
       <a class="store" href="#" aria-disabled="true" onclick="return false">
@@ -29,18 +29,18 @@
       <span class="soon">In beta. Coming soon.</span>
     </div>
     <div class="fan" aria-label="Screens from Phase">
-      <img src="shots/2-progress.jpg" alt="Progress: body fat and lean, day by day">
-      <img src="shots/1-today.jpg" alt="Today: what you've eaten against what you'll burn">
-      <img src="shots/4-train.jpg" alt="Train: how you've trained, week by week">
+      <span class="tint"><img src="shots/2-progress.jpg" alt="Progress: body fat and lean, day by day"><i style="-webkit-mask-image:url(masks/2-progress.png);mask-image:url(masks/2-progress.png)"></i></span>
+      <span class="tint"><img src="shots/1-today.jpg" alt="Today: what you've eaten against what you'll burn"><i style="-webkit-mask-image:url(masks/1-today.png);mask-image:url(masks/1-today.png)"></i></span>
+      <span class="tint"><img src="shots/4-train.jpg" alt="Train: how you've trained, week by week"><i style="-webkit-mask-image:url(masks/4-train.png);mask-image:url(masks/4-train.png)"></i></span>
     </div>
   </section>
 
   <section class="wrap only-small">
     <div class="shots" aria-label="Screens from Phase">
-      <img src="shots/1-today.jpg" alt="" loading="lazy">
-      <img src="shots/2-progress.jpg" alt="" loading="lazy">
-      <img src="shots/3-bodymap.jpg" alt="" loading="lazy">
-      <img src="shots/4-train.jpg" alt="" loading="lazy">
+      <span class="tint"><img src="shots/1-today.jpg" alt="" loading="lazy"><i style="-webkit-mask-image:url(masks/1-today.png);mask-image:url(masks/1-today.png)"></i></span>
+      <span class="tint"><img src="shots/2-progress.jpg" alt="" loading="lazy"><i style="-webkit-mask-image:url(masks/2-progress.png);mask-image:url(masks/2-progress.png)"></i></span>
+      <span class="tint"><img src="shots/3-bodymap.jpg" alt="" loading="lazy"><i style="-webkit-mask-image:url(masks/3-bodymap.png);mask-image:url(masks/3-bodymap.png)"></i></span>
+      <span class="tint"><img src="shots/4-train.jpg" alt="" loading="lazy"><i style="-webkit-mask-image:url(masks/4-train.png);mask-image:url(masks/4-train.png)"></i></span>
     </div>
   </section>
 
@@ -66,7 +66,7 @@
       <div class="goals"><span>Maintain</span><span>Lose fat</span><span>Gain muscle</span></div>
       <p>Pick what you're after. Phase checks your last seven days against it. When you drift, it tells you, and shows where that road goes in a week and a month.</p>
     </div>
-    <img src="shots/5-course.jpg" alt="Drifting: the last seven days against lose fat and gain muscle" loading="lazy">
+    <span class="tint"><img src="shots/5-course.jpg" alt="Drifting: the last seven days against lose fat and gain muscle" loading="lazy"><i style="-webkit-mask-image:url(masks/5-course.png);mask-image:url(masks/5-course.png)"></i></span>
   </section>
 
   <section class="help wrap">
@@ -83,7 +83,7 @@
   let picked = false, timer;
   const set = (h, user) => {
     root.style.setProperty('--pick', `hsl(${h} 100% 86%)`);
-    root.style.setProperty('--shift', `${h - LILAC}deg`);
+    root.style.setProperty('--tint', `hsl(${h} 85% 62%)`); root.style.setProperty('--on', h === LILAC ? 0 : 1);
     dots.forEach(d => d.setAttribute('aria-checked', String(+d.dataset.h === h)));
     if (user) { picked = true; clearInterval(timer); try { localStorage.setItem('phase-hue', h); } catch {} }
   };

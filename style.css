@@ -51,7 +51,7 @@ a { color: inherit; text-decoration: none; }
 .wrap { margin: 0 auto; padding: 0 clamp(20px, 3vw, 120px); }
 
 .lead { display: grid; justify-items: center; text-align: center; padding-block: clamp(24px, 6vh, 72px) clamp(40px, 8vh, 88px); }
-.lead .lead-icon { width: clamp(96px, 12vw, 148px); aspect-ratio: 1; border-radius: 22.5%; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 90px -30px rgba(201,184,255,.45); }
+.lead .lead-icon { width: clamp(96px, 12vw, 148px); aspect-ratio: 1; border-radius: 22.5%; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 90px -30px rgba(201,184,255,.45); }
 .lead h1 { font-size: clamp(56px, 10vw, 128px); font-weight: 700; letter-spacing: -.055em; line-height: .95; margin-top: .3em; }
 .lead p { font-size: clamp(18px, 2vw, 24px); color: var(--grey); margin-top: .7em; letter-spacing: -.01em; }
 .store { display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; padding: 13px 22px 13px 18px; border-radius: 14px;
@@ -63,7 +63,7 @@ a { color: inherit; text-decoration: none; }
 .shots { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(180px, 1fr); margin: 0 auto; gap: clamp(12px, 2vw, 24px);
          overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; scrollbar-width: none; }
 .shots::-webkit-scrollbar { display: none; }
-.shots img { width: 100%; display: block; border-radius: 22px; scroll-snap-align: center; box-shadow: 0 0 0 1px rgba(255,255,255,.07); background: #000; }
+.shots .tint { width: 100%; overflow: hidden; border-radius: 22px; scroll-snap-align: center; box-shadow: 0 0 0 1px rgba(255,255,255,.07); background: #000; }
 
 .points { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: clamp(28px, 4vw, 48px); padding-block: clamp(64px, 10vh, 120px); }
 .points h2 { font-size: clamp(20px, 1.8vw, 24px); letter-spacing: -.02em; }
@@ -75,8 +75,8 @@ a { color: inherit; text-decoration: none; }
 .intent .goals { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .intent .goals span { padding: 8px 14px; border-radius: 999px; border: 1px solid #2A2733; font-size: 15px; }
 .intent p { color: var(--grey); margin-top: 24px; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 30em; }
-.intent img { width: 100%; border-radius: 22px; box-shadow: 0 0 0 1px rgba(255,255,255,.07); }
-@media (max-width: 720px) { .intent { grid-template-columns: 1fr; } .intent img { max-width: 300px; justify-self: center; } }
+.intent .tint { width: 100%; overflow: hidden; border-radius: 22px; box-shadow: 0 0 0 1px rgba(255,255,255,.07); }
+@media (max-width: 720px) { .intent { grid-template-columns: 1fr; } .intent .tint { max-width: 300px; justify-self: center; } }
 
 .help { border-top: 1px solid #1C1A24; padding-block: clamp(48px, 8vh, 96px); text-align: center; color: var(--grey); font-size: 17px; }
 .help a { color: var(--ink); border-bottom: 1px solid #3A3644; }
@@ -104,10 +104,10 @@ a { color: inherit; text-decoration: none; }
           gap: 4vw; }
   .lead-text { justify-items: start; }
   .fan { display: block; position: relative; height: min(76svh, 760px); }
-  .fan img { position: absolute; top: 50%; left: 50%; height: 88%; border-radius: 28px; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 120px -40px rgba(0,0,0,.9); }
-  .fan img:nth-child(1) { transform: translate(-108%, -50%) rotate(-6deg) scale(.9); opacity: .75; }
-  .fan img:nth-child(3) { transform: translate(8%, -50%) rotate(6deg) scale(.9); opacity: .75; }
-  .fan img:nth-child(2) { transform: translate(-50%, -52%); z-index: 1; }
+  .fan .tint { position: absolute; top: 50%; left: 50%; height: 88%; aspect-ratio: 1320 / 2868; border-radius: 28px; overflow: hidden; box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 40px 120px -40px rgba(0,0,0,.9); }
+  .fan .tint:nth-child(1) { transform: translate(-108%, -50%) rotate(-6deg) scale(.9); opacity: .75; }
+  .fan .tint:nth-child(3) { transform: translate(8%, -50%) rotate(6deg) scale(.9); opacity: .75; }
+  .fan .tint:nth-child(2) { transform: translate(-50%, -52%); z-index: 1; }
   .only-small { display: none; }
   /* Everything scales with the window, so a big or zoomed-out screen is filled, not a small island in the middle. */
   .lead .lead-icon { width: 8.5vw; }
@@ -138,7 +138,12 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* Your colour: the app's screens and icon turn to the picked shade; the page's accent follows. */
-.lead .lead-icon, .fan img, .shots img, .intent img { filter: hue-rotate(var(--shift)); transition: filter .5s ease; }
+.tint { position: relative; display: block; }
+.tint img { display: block; width: 100%; height: 100%; border-radius: inherit; box-shadow: none !important; }
+/* The picked colour, laid only over the app's lilac (each image's mask) with the colour blend: same brightness, new hue. */
+.tint i { position: absolute; inset: 0; border-radius: inherit; background: var(--tint, #C9B8FF); mix-blend-mode: color;
+               -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+               opacity: var(--on, 0); transition: opacity .4s ease, background .4s ease; pointer-events: none; }
 .colour { display: grid; grid-template-columns: minmax(220px, 30vw) 1fr; gap: 6vw; align-items: center; border-top: 1px solid #1C1A24;
           padding-block: clamp(64px, 10vh, 120px); }
 .colour h2 { font-size: clamp(40px, 5.5vw, 200px); letter-spacing: -.05em; line-height: .95; }
