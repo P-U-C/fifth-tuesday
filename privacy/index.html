@@ -26,7 +26,11 @@
   </ul>
   <h2>What leaves your iPhone, only when you ask</h2>
   <ul>
-    <li><strong>Claude (Anthropic).</strong> When you log food with a photo, your voice or words, or import a DEXA report, Phase sends that photo, those words (voice is turned into text on your iPhone first) or that PDF to Anthropic's Claude API, using your own API key, and gets the estimate back. Phase asks before the first time, and you can turn it off in Settings › Claude. Anthropic handles it under your agreement with Anthropic and its privacy policy (<a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>). Phase sends nothing else to Anthropic: no Health data, no history.
+    <li><strong>Apple Intelligence.</strong> Unless you add a Claude key, Phase estimates meals with Apple Intelligence: on your iPhone, or on Apple's Private Cloud Compute, which processes the request and keeps nothing. No one else sees it.
+  </ul>
+
+  <ul>
+    <li><strong>Claude (Anthropic).</strong> If you add your own Claude API key, then when you log food with a photo, your voice or words, or import a DEXA report, Phase sends that photo, those words (voice is turned into text on your iPhone first) or that PDF to Anthropic's Claude API, using your own API key, and gets the estimate back. Phase asks before the first time, and you can turn it off in Settings › Claude. Anthropic handles it under your agreement with Anthropic and its privacy policy (<a href="https://www.anthropic.com/legal/privacy">anthropic.com/legal/privacy</a>). Phase sends nothing else to Anthropic: no Health data, no history.
     <li><strong>Your own connector (optional, advanced).</strong> If you set up a Claude connector you host yourself, Phase sends it a summary of your recent days, meals, body estimate and training so that Claude can read them, and receives what Claude logs for you. That server is yours; we have no access to it.
     <li><strong>Exports you share.</strong> Settings › Export your data writes a file of your days on your iPhone. It goes only where you send it.
   </ul>
