@@ -1,0 +1,98 @@
+/* The brand home: black and white, with red only where you'd mark a calendar by hand. */
+:root { --ink: #111111; --paper: #FFFFFF; --panel: #F2F2F2; --line: #E2E2E2; --soft: #3A3A3A; --muted: #6B6B6B;
+        --dot: #D4D4D4; --red: #E4251B; --edge: clamp(20px, 2.8vw, 40px); color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--paper); color: var(--ink); }
+body { font-family: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+a:hover { opacity: .8; }
+h1, h2, h3, .serif { font-family: Gloock, Georgia, serif; font-weight: 400; text-wrap: balance; }
+p { text-wrap: pretty; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+/* Top */
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 16px 24px; flex-wrap: wrap; padding: 22px var(--edge); }
+.logo { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; font-size: 18px; font-weight: 700; text-decoration: none; }
+.logo svg { height: 26px; width: auto; display: block; flex: none; }
+.bar ul { display: flex; gap: clamp(20px, 2.2vw, 32px); list-style: none; font-size: 16px; font-weight: 500; }
+.bar ul a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; }
+
+/* Hero */
+.hero { display: flex; flex-wrap: wrap; gap: 48px 64px; align-items: center; padding: clamp(8px, 2vw, 32px) var(--edge) clamp(72px, 8vw, 112px); }
+.hero .text { flex: 1 1 560px; min-width: 0; }
+.hero h1 { font-size: clamp(54px, 8.2vw, 124px); line-height: .98; letter-spacing: -.02em; }
+.hero h1 span { background: var(--ink); color: var(--paper); padding: 0 .12em; border-radius: .12em;
+                -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.hero p { margin-top: clamp(20px, 2.4vw, 32px); max-width: 26em; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.45; color: var(--soft); }
+.hero .month-art { flex: 1 1 440px; min-width: 0; max-width: 580px; height: auto; display: block; }
+.actions { display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; margin-top: clamp(28px, 3vw, 36px); }
+.pill { display: inline-flex; align-items: center; gap: 14px; min-height: 56px; padding: 0 10px 0 28px; border-radius: 999px;
+        background: var(--ink); color: var(--paper); font-size: 17px; font-weight: 700; text-decoration: none; }
+.pill i { width: 38px; height: 38px; border-radius: 50%; background: var(--paper); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; }
+.pill svg { width: 18px; height: 18px; }
+.quiet { display: inline-flex; align-items: center; min-height: 44px; font-size: 17px; font-weight: 600; text-underline-offset: 5px; }
+
+/* Every day is a vote */
+.vote { padding: clamp(64px, 8vw, 112px) var(--edge) clamp(72px, 8vw, 120px); border-top: 1px solid var(--line); }
+.vote .row { display: flex; flex-wrap: wrap; gap: 40px 72px; align-items: center; }
+.vote .intro { flex: 1 1 420px; min-width: 0; }
+.vote h2 { font-size: clamp(48px, 6vw, 92px); line-height: .96; letter-spacing: -.015em; }
+.vote .intro p { margin-top: 24px; max-width: 26em; font-size: clamp(17px, 1.5vw, 20px); line-height: 1.5; }
+.presets { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.presets button { min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+                  font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.presets button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.count { margin-top: clamp(24px, 3vw, 36px); display: flex; align-items: baseline; gap: 12px; }
+.count b { font-family: Gloock, Georgia, serif; font-weight: 400; font-size: clamp(48px, 4.5vw, 64px); line-height: 1; }
+.count span { font-size: 18px; color: var(--muted); }
+.month { flex: 1.2 1 520px; min-width: 0; padding: 32px 28px 28px; border-radius: 32px; background: var(--panel); }
+.month .head, .month .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.month .head { text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+.month .days { row-gap: 14px; }
+.day { position: relative; height: 64px; display: flex; align-items: center; justify-content: center; }
+.day .join { position: absolute; left: 50%; width: 100%; top: 8px; height: 48px; background: var(--ink); }
+.day .ring { position: absolute; width: 68px; height: 62px; border: 3px solid var(--red); border-radius: 50%; transform: rotate(-12deg); pointer-events: none; z-index: 2; }
+.day button { position: relative; z-index: 1; width: 48px; height: 48px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: var(--dot); transition: background .2s ease; }
+.day button[aria-pressed="true"] { background: var(--ink); }
+.vote .line { margin-top: clamp(56px, 7vw, 104px); max-width: 17em; font-size: clamp(34px, 5vw, 76px); line-height: 1.04; letter-spacing: -.01em; }
+
+/* The fifth Tuesday */
+.quote { display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch; padding: 0 var(--edge) clamp(64px, 8vw, 112px); }
+.quote img { flex: 1 1 520px; min-width: 0; height: clamp(280px, 36vw, 520px); object-fit: cover; object-position: 50% 65%; display: block; border-radius: clamp(24px, 2.2vw, 32px); }
+.quote blockquote { flex: 1 1 520px; min-width: 0; padding: clamp(28px, 3.6vw, 52px); border-radius: clamp(24px, 2.2vw, 32px); background: var(--panel);
+                    display: flex; flex-direction: column; justify-content: center; }
+.quote blockquote p { font-family: Gloock, Georgia, serif; font-size: clamp(25px, 2.6vw, 38px); line-height: 1.2; }
+.quote blockquote footer { margin-top: 24px; font-size: clamp(16px, 1.3vw, 19px); font-weight: 700; }
+
+/* Close */
+.close { padding: clamp(56px, 6vw, 96px) var(--edge) clamp(88px, 9vw, 128px); border-top: 1px solid var(--line); }
+.close h2 { font-size: clamp(58px, 9.4vw, 148px); line-height: .95; letter-spacing: -.02em; }
+.close p { margin-top: 20px; max-width: 24em; font-size: clamp(24px, 2.8vw, 40px); line-height: 1.15; color: var(--muted); }
+.close .actions { margin-top: clamp(32px, 4vw, 48px); }
+
+/* Footer */
+.site { background: var(--ink); color: var(--paper); padding: clamp(48px, 5vw, 64px) var(--edge) 40px; }
+.site .cols { display: flex; flex-wrap: wrap; gap: 32px clamp(48px, 7vw, 96px); font-size: 15px; }
+.site .cols div { display: flex; flex-direction: column; gap: 4px; }
+.site .cols span { color: #A8A8A8; margin-bottom: 4px; }
+.site .cols a, .site .cols em { display: inline-flex; align-items: center; min-height: 32px; text-decoration: none; font-style: normal; }
+.site .cols em { color: #8A8A8A; }
+.site .base { margin-top: clamp(40px, 5vw, 64px); padding-top: 24px; border-top: 1px solid #3A3A3A; display: flex; flex-wrap: wrap;
+              justify-content: space-between; align-items: center; gap: 16px; font-size: 14px; color: #A8A8A8; }
+.site .base .logo { color: var(--paper); font-size: 15px; gap: 10px; }
+.site .base .logo svg { height: 20px; }
+
+@media (max-width: 600px) {
+  .bar { flex-wrap: nowrap; }
+  .bar ul { font-size: 15px; gap: 18px; }
+  .bar li.wide { display: none; }
+  .hero .actions .pill { width: 100%; justify-content: space-between; }
+  .month { padding: 18px 10px 14px; border-radius: 24px; }
+  .month .head { font-size: 12px; margin-bottom: 6px; }
+  .month .days { row-gap: 8px; }
+  .day { height: 46px; }
+  .day .join { top: 4px; height: 38px; }
+  .day button { width: 38px; height: 38px; }
+  .day .ring { width: 50px; height: 46px; border-width: 2.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .day button { transition: none; } }
