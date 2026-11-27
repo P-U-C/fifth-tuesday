@@ -24,7 +24,7 @@ The website, published with GitHub Pages: **https://p-u-c.github.io/fifth-tuesda
 | [`/support/`](https://p-u-c.github.io/fifth-tuesday/support/) | Questions and how to reach us |
 | [`/privacy/`](https://p-u-c.github.io/fifth-tuesday/privacy/) | Phase's privacy policy |
 
-Plain HTML, CSS and a little JavaScript; no build step. The home page is black and white (`brand.css`, Gloock and Hanken Grotesk); the products and app pages are dark (`style.css`, Inter). The colour picker (`colour.js`) is shared by the products and Phase pages, and remembers the pick between them.
+Plain HTML, CSS and a little JavaScript; no build step. The whole site is set in Inter, from Google Fonts. The home page is black and white (`brand.css`); the products and app pages are dark (`style.css`). The colour picker (`colour.js`) is shared by the products and Phase pages, and remembers the pick between them.
 
 The source lives in `site/` in the Phase app's repo and is published here with `scripts/site.sh` there, so edit it
 there, not here. **27 Nov 2026:** the new home page, `products/`, `brand.css`, `colour.js`, `home/` and the link changes on the
