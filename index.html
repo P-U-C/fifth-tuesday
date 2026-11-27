@@ -3,100 +3,127 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Fifth Tuesday</title>
-<meta name="description" content="Fifth Tuesday. You become what you do every day. Phase, Field and Gain: your body, your head, your money.">
-<meta name="theme-color" content="#06050A">
+<title>Fifth Tuesday · Your days are not neutral</title>
+<meta name="description" content="What you do every day is what you become. Fifth Tuesday makes small apps that show you what you really did: Phase for your body, Field for your head, Gain for your money.">
+<meta name="theme-color" content="#FFFFFF">
 <meta property="og:title" content="Fifth Tuesday">
-<meta property="og:description" content="You become what you do every day.">
-<meta property="og:image" content="icons/phase.png">
+<meta property="og:description" content="Your days are not neutral.">
+<meta property="og:image" content="https://p-u-c.github.io/fifth-tuesday/home/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/phase.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Hanken+Grotesk:wght@400..800&display=swap">
+<link rel="stylesheet" href="brand.css?v=1">
 </head>
 <body>
-<main class="poster">
-  <header class="title"><p class="mark">Fifth Tuesday</p><h1>You become<br>what you do<br>every day.</h1></header>
-  <div class="field">
-    <canvas id="days" aria-hidden="true"></canvas>
-  <section class="apps" id="apps" aria-label="The apps">
-      <a class="app" href="phase/"><img src="icons/phase.png" alt=""><span>Phase</span><small>body<i> · </i><b>in beta</b></small></a>
-      <div class="app later"><img src="icons/field.png" alt=""><span>Field</span><small>mind<i> · </i><b>next</b></small></div>
-      <div class="app later"><img src="icons/gain.png" alt=""><span>Gain</span><small>money<i> · </i><b>later</b></small></div>
-    </section>
-  </div>
-  <footer class="links"><a href="privacy/">Privacy</a><a href="support/">Support</a><span>Fifth Tuesday, from P-U-C · © 2026</span></footer>
+<header class="bar">
+  <a class="logo" href="./"><svg viewBox="75 129 362 273" aria-hidden="true"><circle cx="94" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="148" cy="148" r="13" fill="#111111"></circle><circle cx="202" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="256" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="310" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="364" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="418" cy="148" r="13" fill="#C4C4C4"></circle><circle cx="94" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="148" cy="202" r="13" fill="#111111"></circle><circle cx="202" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="256" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="310" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="364" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="418" cy="202" r="13" fill="#C4C4C4"></circle><circle cx="94" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="148" cy="256" r="13" fill="#111111"></circle><circle cx="202" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="256" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="310" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="364" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="418" cy="256" r="13" fill="#C4C4C4"></circle><circle cx="94" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="148" cy="310" r="13" fill="#111111"></circle><circle cx="202" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="256" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="310" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="364" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="418" cy="310" r="13" fill="#C4C4C4"></circle><circle cx="94" cy="364" r="13" fill="#C4C4C4"></circle><circle cx="148" cy="364" r="13" fill="#E4251B"></circle><circle cx="202" cy="364" r="13" fill="#C4C4C4"></circle><path d="M169.8 345.0 Q171.8 346.8 173.6 348.7 Q175.2 350.8 176.6 353.1 Q177.7 355.6 178.6 358.1 Q179.1 360.8 179.4 363.5 Q179.3 366.3 178.9 369.1 Q178.2 371.8 177.2 374.4 Q175.9 377.0 174.3 379.4 Q172.4 381.6 170.3 383.6 Q168.0 385.4 165.6 387.0 Q163.0 388.3 160.3 389.4 Q157.6 390.2 154.8 390.8 Q152.0 391.2 149.2 391.3 Q146.4 391.1 143.7 390.8 Q141.1 390.2 138.5 389.5 Q136.1 388.5 133.7 387.4 Q131.5 386.2 129.3 384.7 Q127.3 383.1 125.5 381.4 Q123.7 379.5 122.2 377.4 Q120.8 375.3 119.7 372.9 Q118.7 370.5 118.0 368.0 Q117.5 365.3 117.3 362.7 Q117.4 359.9 117.8 357.2 Q118.5 354.5 119.5 351.8 Q120.8 349.2 122.4 346.8 Q124.3 344.5 126.4 342.4 Q128.8 340.5 131.3 338.8 Q134.0 337.4 136.8 336.3 Q139.8 335.5 142.7 335.0 Q145.7 334.7 148.7 334.8 Q151.6 335.1 154.5 335.7 Q157.2 336.5 159.8 337.6 Q162.2 338.9 164.5 340.3 Q166.7 341.9 168.6 343.7 Q170.4 345.6 172.0 347.7 Q173.4 349.8 174.6 352.1 Q175.6 354.4 176.5 356.8" fill="none" stroke="#E4251B" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"></path></svg>Fifth Tuesday</a>
+  <nav aria-label="Main"><ul><li><a href="products/">Products</a></li><li><a href="phase/">Phase</a></li><li class="wide"><a href="support/">Support</a></li></ul></nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="text">
+      <h1>Your days are <span>not neutral.</span></h1>
+      <p>What you do every day is what you become. The good news is that tomorrow morning is always there to start again.</p>
+      <div class="actions">
+        <a class="pill" href="products/">See the products <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a>
+        <a class="quiet" href="phase/">Meet Phase</a>
+      </div>
+    </div>
+    <img class="month-art" src="home/month.png" width="1200" height="858" alt="A month of days: kept days in a row join into black streaks, and the fifth Tuesday is circled in red">
+  </section>
+
+  <section class="vote" aria-labelledby="vote-title">
+    <div class="row">
+      <div class="intro">
+        <h2 id="vote-title">Every day is a vote.</h2>
+        <p>Tap the days you'd keep this month. Days in a row join up into one streak. The circle is the fifth Tuesday.</p>
+        <div class="presets" role="group" aria-label="Try a month">
+          <button type="button" data-preset="default">By default</button>
+          <button type="button" data-preset="purpose">On purpose</button>
+          <button type="button" data-preset="clear">Start fresh</button>
+        </div>
+        <p class="count" aria-live="polite"><b id="kept">7</b><span>of 31 days kept</span></p>
+      </div>
+      <div class="month">
+        <div class="head" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+        <div class="days" id="days" role="group" aria-label="A month, Monday first. Tap a day to keep it."></div>
+      </div>
+    </div>
+    <p class="line serif">Skip the votes enough times, and you lose the election of your own life.</p>
+  </section>
+
+  <section class="quote">
+    <img src="home/crossing.jpg" width="1600" height="800" alt="People crossing a wet city street at night" loading="lazy">
+    <blockquote>
+      <p>"What you do when no one is watching, when it doesn't feel important, when it's the fifth Tuesday in a row of the same routine, is the truest measure of who you're becoming."</p>
+      <footer>We named the company after that day.</footer>
+    </blockquote>
+  </section>
+
+  <section class="close">
+    <h2>Start tomorrow morning.</h2>
+    <p class="serif">One walk, one early night, one meal you're glad about. Then the morning after that.</p>
+    <div class="actions">
+      <a class="pill" href="products/">See the products <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></a>
+    </div>
+  </section>
 </main>
 
+<footer class="site">
+  <div class="cols">
+    <div><span>Products</span><a href="phase/">Phase</a><em>Field, next</em><em>Gain, later</em></div>
+    <div><span>Fifth Tuesday</span><a href="products/">All products</a><a href="support/">Support</a><a href="privacy/">Privacy</a></div>
+  </div>
+  <div class="base">
+    <a class="logo" href="./"><svg viewBox="75 129 362 273" aria-hidden="true"><circle cx="94" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="148" cy="148" r="13" fill="#FFFFFF"></circle><circle cx="202" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="256" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="310" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="364" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="418" cy="148" r="13" fill="#5A5A5A"></circle><circle cx="94" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="148" cy="202" r="13" fill="#FFFFFF"></circle><circle cx="202" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="256" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="310" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="364" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="418" cy="202" r="13" fill="#5A5A5A"></circle><circle cx="94" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="148" cy="256" r="13" fill="#FFFFFF"></circle><circle cx="202" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="256" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="310" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="364" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="418" cy="256" r="13" fill="#5A5A5A"></circle><circle cx="94" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="148" cy="310" r="13" fill="#FFFFFF"></circle><circle cx="202" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="256" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="310" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="364" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="418" cy="310" r="13" fill="#5A5A5A"></circle><circle cx="94" cy="364" r="13" fill="#5A5A5A"></circle><circle cx="148" cy="364" r="13" fill="#E4251B"></circle><circle cx="202" cy="364" r="13" fill="#5A5A5A"></circle><path d="M169.8 345.0 Q171.8 346.8 173.6 348.7 Q175.2 350.8 176.6 353.1 Q177.7 355.6 178.6 358.1 Q179.1 360.8 179.4 363.5 Q179.3 366.3 178.9 369.1 Q178.2 371.8 177.2 374.4 Q175.9 377.0 174.3 379.4 Q172.4 381.6 170.3 383.6 Q168.0 385.4 165.6 387.0 Q163.0 388.3 160.3 389.4 Q157.6 390.2 154.8 390.8 Q152.0 391.2 149.2 391.3 Q146.4 391.1 143.7 390.8 Q141.1 390.2 138.5 389.5 Q136.1 388.5 133.7 387.4 Q131.5 386.2 129.3 384.7 Q127.3 383.1 125.5 381.4 Q123.7 379.5 122.2 377.4 Q120.8 375.3 119.7 372.9 Q118.7 370.5 118.0 368.0 Q117.5 365.3 117.3 362.7 Q117.4 359.9 117.8 357.2 Q118.5 354.5 119.5 351.8 Q120.8 349.2 122.4 346.8 Q124.3 344.5 126.4 342.4 Q128.8 340.5 131.3 338.8 Q134.0 337.4 136.8 336.3 Q139.8 335.5 142.7 335.0 Q145.7 334.7 148.7 334.8 Q151.6 335.1 154.5 335.7 Q157.2 336.5 159.8 337.6 Q162.2 338.9 164.5 340.3 Q166.7 341.9 168.6 343.7 Q170.4 345.6 172.0 347.7 Q173.4 349.8 174.6 352.1 Q175.6 354.4 176.5 356.8" fill="none" stroke="#E4251B" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"></path></svg>Fifth Tuesday</a>
+    <span>Fifth Tuesday, from P-U-C · © 2026</span>
+  </div>
+</footer>
+
 <script>
-// The days fill in, left to right, more of them kept as they go. Then they gather into the three apps:
-// each dot drifts into its third of the field and fades as that app's icon comes up.
+// Every day is a vote: tap the days you'd keep. Kept days next to each other in a week join into one streak.
+// The month starts on a Monday, so its Tuesdays are the 2nd, 9th, 16th, 23rd and 30th; the 30th is the fifth, and gets the ring.
 (() => {
-  const c = document.getElementById('days'), g = c.getContext('2d'), apps = document.getElementById('apps');
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let dots = [], cols = 0, rows = 0, cell = 0, dpr = 1, t0 = 0, done = false;
-  const FILL_PER_COL = 22, HOLD = 700, GATHER = 1400;
-  function layout() {
-    dpr = Math.min(devicePixelRatio || 1, 2);
-    const w = c.clientWidth, h = c.clientHeight;
-    c.width = w * dpr; c.height = h * dpr;
-    cell = Math.max(8, w / 72) * dpr;
-    cols = Math.floor(c.width / cell); rows = Math.max(1, Math.floor(c.height / cell));
-    const ox = (c.width - cols * cell) / 2, oy = (c.height - rows * cell) / 2;
-    // Where each third's icon sits, in canvas pixels.
-    const box = c.getBoundingClientRect();
-    const icons = [...apps.querySelectorAll('img')].map(img => {
-      const r = img.getBoundingClientRect();
-      return { x: (r.left - box.left) * dpr, y: (r.top - box.top) * dpr, w: r.width * dpr, h: r.height * dpr };
-    });
-    let s = 11; const rand = () => (s = (s * 16807) % 2147483647) / 2147483647;
-    dots = [];
-    for (let x = 0; x < cols; x++) {
-      const keep = 0.18 + 0.72 * (x / Math.max(1, cols - 1));
-      for (let y = 0; y < rows; y++) {
-        const k = rand() < keep, ic = icons[Math.min(2, Math.floor(3 * x / cols))];
-        const a = rand() * Math.PI * 2, rr = Math.sqrt(rand()) * ic.w * 0.42;
-        dots.push({ col: x, kept: k, x: ox + (x + .5) * cell, y: oy + (y + .5) * cell,
-                    tx: ic.x + ic.w / 2 + Math.cos(a) * rr, ty: ic.y + ic.h / 2 + Math.sin(a) * rr, lag: rand() * 0.35 });
-      }
-    }
+  const PRESETS = {
+    default: [1, 2, 3, 4, 9, 17, 26],
+    purpose: [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30],
+    clear: []
+  };
+  const grid = document.getElementById('days'), count = document.getElementById('kept');
+  const presetButtons = [...document.querySelectorAll('[data-preset]')];
+  let kept = new Set(PRESETS.default);
+  const cells = [];
+  for (let n = 1; n <= 31; n++) {
+    const cell = document.createElement('div');
+    cell.className = 'day';
+    const join = document.createElement('i');
+    join.className = 'join';
+    cell.append(join);
+    if (n === 30) { const ring = document.createElement('i'); ring.className = 'ring'; cell.append(ring); }
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', n === 30 ? 'Day 30, the fifth Tuesday' : 'Day ' + n);
+    b.addEventListener('click', () => { kept.has(n) ? kept.delete(n) : kept.add(n); draw(); });
+    cell.append(b);
+    grid.append(cell);
+    cells.push({ n, join, b });
   }
-  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  function frame(now) {
-    const t = now - t0, fillEnd = cols * FILL_PER_COL, gatherStart = fillEnd + HOLD;
-    const front = Math.min(cols + 1, t / FILL_PER_COL);
-    const g01 = Math.max(0, Math.min(1, (t - gatherStart) / GATHER));
-    const r = cell * 0.26;
-    g.clearRect(0, 0, c.width, c.height);
-    // Batched: one path per colour and fade step, so a phone draws thousands of dots a frame easily.
-    const paths = new Map();
-    for (const d of dots) {
-      const p = ease(Math.max(0, Math.min(1, (g01 - d.lag) / (1 - d.lag))));
-      const lit = d.kept && d.col < front;
-      const step = Math.round((1 - p) * 8);
-      if (step <= 0) continue;
-      const key = (lit ? 'L' : 'D') + step;
-      let path = paths.get(key); if (!path) paths.set(key, path = new Path2D());
-      const x = d.x + (d.tx - d.x) * p, y = d.y + (d.ty - d.y) * p, rr = r * (1 - 0.5 * p);
-      path.moveTo(x + rr, y); path.arc(x, y, rr, 0, 7);
+  const same = (a, b) => a.length === b.size && a.every(x => b.has(x));
+  function draw() {
+    for (const { n, join, b } of cells) {
+      const on = kept.has(n);
+      b.setAttribute('aria-pressed', String(on));
+      join.hidden = !(on && (n - 1) % 7 < 6 && kept.has(n + 1));
     }
-    for (const [key, path] of paths) {
-      g.globalAlpha = (+key.slice(1)) / 8 * (key[0] === 'L' ? 1 : 0.9);
-      g.fillStyle = key[0] === 'L' ? '#C9B8FF' : '#1C1A24';
-      g.fill(path);
-    }
-    g.globalAlpha = 1;
-    if (g01 > 0.35 && !apps.classList.contains('in')) apps.classList.add('in');
-    if (g01 < 1) requestAnimationFrame(frame); else { done = true; g.clearRect(0, 0, c.width, c.height); }
+    count.textContent = kept.size;
+    for (const p of presetButtons) p.setAttribute('aria-pressed', String(same(PRESETS[p.dataset.preset], kept)));
   }
-  function go() {
-    if (still) { apps.classList.add('in'); return; }
-    layout(); t0 = performance.now() + 300; requestAnimationFrame(frame);
-  }
-  addEventListener('resize', () => { if (!done && !still) layout(); });
-  document.fonts ? document.fonts.ready.then(go) : go();
+  for (const p of presetButtons) p.addEventListener('click', () => { kept = new Set(PRESETS[p.dataset.preset]); draw(); });
+  draw();
 })();
 </script>
 </body>

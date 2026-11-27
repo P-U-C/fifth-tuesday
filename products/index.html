@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Products · Fifth Tuesday</title>
+<meta name="description" content="Fifth Tuesday. You become what you do every day. Phase, Field and Gain: your body, your head, your money.">
+<meta name="theme-color" content="#06050A">
+<meta property="og:title" content="Fifth Tuesday · Products">
+<meta property="og:description" content="You become what you do every day.">
+<meta property="og:image" content="https://p-u-c.github.io/fifth-tuesday/icons/phase.png">
+<link rel="icon" href="../favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="../icons/phase.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../style.css?v=21">
+</head>
+<body>
+<main>
+<div class="poster">
+  <header class="title"><a class="mark" href="../" style="color:inherit">Fifth Tuesday</a><h1>You become<br>what you do<br>every day.</h1></header>
+  <div class="field">
+    <canvas id="days" aria-hidden="true"></canvas>
+  <section class="apps" id="apps" aria-label="The apps">
+      <a class="app" href="../phase/"><img src="../icons/phase.png" alt=""><span>Phase</span><small>body<i> · </i><b>in beta</b></small></a>
+      <div class="app later"><img src="../icons/field.png" alt=""><span>Field</span><small>mind<i> · </i><b>next</b></small></div>
+      <div class="app later"><img src="../icons/gain.png" alt=""><span>Gain</span><small>money<i> · </i><b>later</b></small></div>
+    </section>
+  </div>
+  <p class="links"><a href="#phase">Phase, first <span aria-hidden="true">↓</span></a></p>
+</div>
+
+<section class="seventy wrap" id="phase" aria-labelledby="seventy-title">
+  <div class="seventy-text">
+    <a class="kicker" href="../phase/"><img src="../icons/phase.png" alt="">Phase<i> · </i>your body<i> · </i>in beta</a>
+    <h2 id="seventy-title">The person you'll be at seventy is being made today.</h2>
+    <p>Mostly in days that look like this:</p>
+    <ul class="habits">
+      <li>A 20-minute walk, whatever the weather.</li>
+      <li>Protein at every meal.</li>
+      <li>Your phone out of the bedroom.</li>
+      <li>In bed by half ten.</li>
+    </ul>
+  </div>
+  <div class="seventy-app">
+    <span class="tint phone"><img src="../phase/shots/1-today.jpg" width="506" height="1100" alt="Phase on iPhone: the Today screen, with the moon showing food in against energy burned"><i style="-webkit-mask-image:url(../phase/masks/1-today.png);mask-image:url(../phase/masks/1-today.png)"></i></span>
+    <div class="seventy-side">
+      <div class="wheel" id="wheel" role="radiogroup" aria-label="Pick a colour for Phase"></div>
+      <h3>Your colour.</h3>
+      <p>We're black and white. Phase is whatever colour you are: pick one and the whole app follows.</p>
+    </div>
+    <div class="seventy-more">
+      <p class="what">Phase shows you whether today actually happened: what you ate, what you burned, what you lifted.</p>
+      <a class="see" href="../phase/">See Phase</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="links page-end"><a href="../">Home</a><a href="../privacy/">Privacy</a><a href="../support/">Support</a><span>Fifth Tuesday, from P-U-C · © 2026</span></footer>
+
+<script>
+// A year of days, laid out as a calendar: the last twelve months, a block per month, Monday first.
+// The days fill in date by date, more of them kept as the year goes on; fifth Tuesdays get a ring.
+// Then they gather into the three apps: each dot drifts into its third of the field and fades as that app's icon comes up.
+(() => {
+  const c = document.getElementById('days'), g = c.getContext('2d'), apps = document.getElementById('apps');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let dots = [], labels = [], days = 0, cell = 0, dpr = 1, t0 = 0, done = false;
+  const FILL_PER_DAY = 4.5, HOLD = 700, GATHER = 1400;
+  const GAP_X = 1.4, GAP_Y = 1.2;          // space between month blocks, in cells
+  // The twelve months ending with this one; days after today stay unlived.
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const months = [];
+  for (let i = 11; i >= 0; i--) months.push(new Date(today.getFullYear(), today.getMonth() - i, 1));
+  function layout() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    const w = c.clientWidth, h = c.clientHeight;
+    c.width = w * dpr; c.height = h * dpr;
+    // Pick the arrangement of month blocks (12 across, 6 x 2, 4 x 3 ...) that gives the biggest days.
+    // A block is 7 days wide and a label plus six weeks tall.
+    let best = null;
+    for (const mc of [12, 6, 4, 3, 2, 1]) {
+      const mr = 12 / mc, wc = mc * 7 + (mc - 1) * GAP_X, hc = mr * 7 + (mr - 1) * GAP_Y;
+      const size = Math.min(w / wc, h / hc, 30);
+      if (!best || size > best.size) best = { mc, mr, wc, hc, size };
+    }
+    cell = Math.max(4, best.size) * dpr;
+    const ox = (c.width - best.wc * cell) / 2, oy = (c.height - best.hc * cell) / 2;
+    const box = c.getBoundingClientRect();
+    const icons = [...apps.querySelectorAll('img')].map(img => {
+      const r = img.getBoundingClientRect();
+      return { x: (r.left - box.left) * dpr, y: (r.top - box.top) * dpr, w: r.width * dpr, h: r.height * dpr };
+    });
+    let s = 11; const rand = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    dots = []; labels = [];
+    let n = 0;
+    const total = Math.round((today - months[0]) / 864e5) + 1;
+    months.forEach((m, i) => {
+      const bx = ox + (i % best.mc) * (7 + GAP_X) * cell, by = oy + Math.floor(i / best.mc) * (7 + GAP_Y) * cell;
+      labels.push({ x: bx + 0.5 * cell - cell * 0.26, y: by + 0.55 * cell, text: m.toLocaleString('en', { month: 'short' }) });
+      const first = (m.getDay() + 6) % 7, len = new Date(m.getFullYear(), m.getMonth() + 1, 0).getDate();
+      let tuesdays = 0;
+      for (let d = 1; d <= len; d++) {
+        const date = new Date(m.getFullYear(), m.getMonth(), d), col = (first + d - 1) % 7, row = Math.floor((first + d - 1) / 7);
+        if (col === 1) tuesdays++;
+        const lived = date <= today, idx = lived ? n++ : Infinity;
+        const keep = 0.18 + 0.72 * (lived ? idx / Math.max(1, total - 1) : 1);
+        const x = bx + (col + .5) * cell, y = by + (row + 1.5) * cell;
+        const ic = icons[Math.min(2, Math.floor(3 * (x - ox) / (best.wc * cell)))];
+        const a = rand() * Math.PI * 2, rr = Math.sqrt(rand()) * ic.w * 0.42;
+        dots.push({ idx, kept: lived && rand() < keep, fifth: col === 1 && tuesdays === 5, today: +date === +today, x, y,
+                    tx: ic.x + ic.w / 2 + Math.cos(a) * rr, ty: ic.y + ic.h / 2 + Math.sin(a) * rr, lag: rand() * 0.35 });
+      }
+    });
+    days = n;
+  }
+  const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function frame(now) {
+    const t = now - t0, fillEnd = days * FILL_PER_DAY, gatherStart = fillEnd + HOLD;
+    const front = Math.max(0, t / FILL_PER_DAY);
+    const g01 = Math.max(0, Math.min(1, (t - gatherStart) / GATHER));
+    const r = cell * 0.26;
+    g.clearRect(0, 0, c.width, c.height);
+    // Month names, fading as the days leave their blocks.
+    g.globalAlpha = Math.max(0, 1 - g01 * 3);
+    if (g.globalAlpha > 0) {
+      g.fillStyle = '#77737F'; g.font = `600 ${Math.round(cell * 0.62)}px Inter, system-ui, sans-serif`; g.textBaseline = 'middle';
+      for (const l of labels) g.fillText(l.text, l.x, l.y);
+    }
+    // Batched: one path per colour and fade step, so a phone draws a year of days a frame easily.
+    const paths = new Map(), rings = new Path2D();
+    let ringAlpha = 0;
+    for (const d of dots) {
+      const p = ease(Math.max(0, Math.min(1, (g01 - d.lag) / (1 - d.lag))));
+      const filled = d.idx < front, lit = d.kept && filled;
+      const step = Math.round((1 - p) * 8);
+      if (step <= 0) continue;
+      const key = (d.today && filled ? 'T' : lit ? 'L' : 'D') + step;
+      let path = paths.get(key); if (!path) paths.set(key, path = new Path2D());
+      const x = d.x + (d.tx - d.x) * p, y = d.y + (d.ty - d.y) * p, rr = r * (1 - 0.5 * p);
+      path.moveTo(x + rr, y); path.arc(x, y, rr, 0, 7);
+      if (d.fifth && filled && p === 0) { rings.moveTo(x + cell * 0.46, y); rings.arc(x, y, cell * 0.46, 0, 7); ringAlpha = 1; }
+    }
+    for (const [key, path] of paths) {
+      g.globalAlpha = (+key.slice(1)) / 8 * (key[0] === 'D' ? 0.9 : 1);
+      g.fillStyle = key[0] === 'T' ? '#E2D8FF' : key[0] === 'L' ? '#C9B8FF' : '#1C1A24';
+      g.fill(path);
+    }
+    if (ringAlpha) { g.globalAlpha = Math.max(0, 1 - g01 * 4); g.strokeStyle = '#C9B8FF'; g.lineWidth = Math.max(1, cell * 0.06); g.stroke(rings); }
+    g.globalAlpha = 1;
+    if (g01 > 0.35 && !apps.classList.contains('in')) apps.classList.add('in');
+    if (g01 < 1) requestAnimationFrame(frame); else { done = true; g.clearRect(0, 0, c.width, c.height); }
+  }
+  function go() {
+    if (still) { apps.classList.add('in'); return; }
+    layout(); t0 = performance.now() + 300; requestAnimationFrame(frame);
+  }
+  addEventListener('resize', () => { if (!done && !still) layout(); });
+  document.fonts ? document.fonts.ready.then(go) : go();
+})();
+</script>
+<script src="../colour.js?v=1"></script>
+</body>
+</html>
